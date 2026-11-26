@@ -47,6 +47,7 @@ export const DEFAULT_CONFIG: EventConfig = {
     recovery: false,
     luckydip: false,
     winnersRevealed: false,
+    requirePin: false,
     ballot: "all",
   },
   cocktail: { name: "", ingredients: "", imageUrl: "", blurb: "" },

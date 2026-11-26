@@ -12,6 +12,7 @@ export function JoinFlow({ eventName }: { eventName: string }) {
   const [code, setCode] = useState(params.get("code") || "");
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [guests, setGuests] = useState<G[]>([]);
+  const [requirePin, setRequirePin] = useState(true);
   const [q, setQ] = useState("");
   const [picked, setPicked] = useState<G | null>(null);
   const [pin, setPin] = useState("");
@@ -32,18 +33,20 @@ export function JoinFlow({ eventName }: { eventName: string }) {
       setErr((await r.json()).error || "Wrong code");
       return;
     }
-    setGuests((await r.json()).guests);
+    const d = await r.json();
+    setGuests(d.guests);
+    setRequirePin(!!d.requirePin);
     setStep(2);
   }
 
-  async function submitPin() {
-    if (!picked) return;
+  async function submitPin(g: G | null = picked) {
+    if (!g) return;
     setErr("");
     setBusy(true);
     const r = await fetch("/api/join", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ code: code.trim(), guestId: picked.id, pin }),
+      body: JSON.stringify({ code: code.trim(), guestId: g.id, pin }),
     });
     setBusy(false);
     if (!r.ok) {
@@ -100,7 +103,7 @@ export function JoinFlow({ eventName }: { eventName: string }) {
       {step === 2 && (
         <>
           <div>
-            <p className="eyebrow">Step 2 of 3</p>
+            <p className="eyebrow">{requirePin ? "Step 2 of 3" : "Last step"}</p>
             <h1 className="display" style={{ fontSize: 44 }}>
               Which one are you?
             </h1>
@@ -119,7 +122,8 @@ export function JoinFlow({ eventName }: { eventName: string }) {
                 key={g.id}
                 onClick={() => {
                   setPicked(g);
-                  setStep(3);
+                  if (requirePin) setStep(3);
+                  else void submitPin(g);
                 }}
                 style={{ background: "none", border: 0, textAlign: "left", cursor: "pointer", padding: "14px 0" }}
               >

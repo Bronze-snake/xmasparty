@@ -10,6 +10,7 @@ export type Flags = {
   recovery: boolean;
   luckydip: boolean;
   winnersRevealed: boolean;
+  requirePin: boolean;
   ballot: "all" | "checkedin";
 };
 

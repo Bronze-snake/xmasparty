@@ -15,6 +15,7 @@ const FLAGS: { key: keyof Flags; label: string; help: string }[] = [
   { key: "recovery", label: "Recovery kits", help: "Guests tap Claim and show the screen." },
   { key: "luckydip", label: "Lucky dip", help: "Random prize from your list under Extras." },
   { key: "winnersRevealed", label: "Reveal winners", help: "Shows winners on the site and closes voting." },
+  { key: "requirePin", label: "Require a guest PIN", help: "Off = tap your name and you're in. On = guests set a 4-digit PIN too." },
 ];
 
 export default async function RunSheet() {

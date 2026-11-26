@@ -9,13 +9,14 @@ const ADMIN_COOKIE = "bs_admin";
 const ONE_YEAR = 60 * 60 * 24 * 365;
 
 async function secret(): Promise<string> {
-  if (process.env.SESSION_SECRET) return process.env.SESSION_SECRET;
-  let s = await kv().get<string>("auth:secret");
-  if (!s) {
-    s = randomBytes(32).toString("hex");
-    await kv().set("auth:secret", s);
-  }
-  return s;
+  // Stable per deployment without needing Redis: prefer an explicit secret,
+  // then the Redis token Vercel injects (stable for the project), then a fixed fallback.
+  return (
+    process.env.SESSION_SECRET ||
+    process.env.KV_REST_API_TOKEN ||
+    process.env.UPSTASH_REDIS_REST_TOKEN ||
+    "bronze-snake-xmas-2026-fallback-secret"
+  );
 }
 
 async function sign(payload: string) {
