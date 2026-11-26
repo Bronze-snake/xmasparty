@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { kv } from "@/lib/kv";
+import { blobToken } from "@/lib/blob-token";
 
 export async function GET() {
   const store = kv();
@@ -8,5 +9,5 @@ export async function GET() {
     const n = await store.incr("health:ping");
     ok = n > 0;
   } catch {}
-  return NextResponse.json({ redis: !store.isMemory, redisOk: ok, blob: !!process.env.BLOB_READ_WRITE_TOKEN });
+  return NextResponse.json({ redis: !store.isMemory, redisOk: ok, blob: !!blobToken(), blobVar: Object.keys(process.env).filter((n) => n.endsWith("_READ_WRITE_TOKEN")) });
 }

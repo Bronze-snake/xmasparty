@@ -2,6 +2,7 @@ import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 import { currentGuest, isAdmin } from "@/lib/auth";
 import { getConfig } from "@/lib/data";
+import { blobToken } from "@/lib/blob-token";
 
 export async function POST(req: Request) {
   const body = (await req.json()) as HandleUploadBody;
@@ -12,6 +13,7 @@ export async function POST(req: Request) {
     const json = await handleUpload({
       body,
       request: req,
+      token: blobToken(),
       onBeforeGenerateToken: async () => ({
         allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "image/heic"],
         maximumSizeInBytes: 8 * 1024 * 1024,

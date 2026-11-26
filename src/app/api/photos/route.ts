@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { del } from "@vercel/blob";
 import { currentGuest, isAdmin } from "@/lib/auth";
 import { addPhoto, getConfig, listPhotos, removePhoto } from "@/lib/data";
+import { blobToken } from "@/lib/blob-token";
 
 export async function GET() {
   const [g, admin] = await Promise.all([currentGuest(), isAdmin()]);
@@ -37,7 +38,7 @@ export async function DELETE(req: Request) {
   if (!admin && (!g || p.guestId !== g.id)) return NextResponse.json({ error: "unauthorised" }, { status: 401 });
   await removePhoto(id);
   try {
-    await del(p.url);
+    await del(p.url, { token: blobToken() });
   } catch {}
   return NextResponse.json({ ok: true });
 }
