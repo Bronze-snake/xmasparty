@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { upload } from "@vercel/blob/client";
 import type { Photo } from "@/lib/types";
 
-async function shrink(file: File, max = 1600, quality = 0.82): Promise<Blob> {
+async function shrink(file: File, max = 1600, quality = 0.8): Promise<Blob> {
   if (!file.type.startsWith("image/") || file.type === "image/heic") return file;
   const bmp = await createImageBitmap(file).catch(() => null);
   if (!bmp) return file;
@@ -48,9 +47,11 @@ export function Gallery({ canUpload, source = "guest" }: { canUpload: boolean; s
       setProgress(`Uploading ${n} of ${arr.length}…`);
       try {
         const blob = await shrink(f);
-        const name = `party/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.jpg`;
-        const res = await upload(name, blob, { access: "public", handleUploadUrl: "/api/photos/upload", contentType: blob.type || "image/jpeg" });
-        await fetch("/api/photos", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ url: res.url, source }) });
+        const fd = new FormData();
+        fd.set("file", blob, "photo.jpg");
+        fd.set("source", source);
+        const r = await fetch("/api/photos/upload", { method: "POST", body: fd });
+        if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || `HTTP ${r.status}`);
       } catch (e) {
         setProgress(`Couldn't upload ${f.name}: ${(e as Error).message}`);
         await new Promise((r) => setTimeout(r, 1500));

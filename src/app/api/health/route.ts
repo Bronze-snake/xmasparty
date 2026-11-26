@@ -9,5 +9,5 @@ export async function GET() {
     const n = await store.incr("health:ping");
     ok = n > 0;
   } catch {}
-  return NextResponse.json({ redis: !store.isMemory, redisOk: ok, blob: !!blobToken(), blobVar: Object.keys(process.env).filter((n) => n.endsWith("_READ_WRITE_TOKEN")) });
+  return NextResponse.json({ redis: !store.isMemory, redisOk: ok, blob: !!(blobToken() || process.env.BLOB_STORE_ID), blobAuth: blobToken() ? "token" : process.env.BLOB_STORE_ID ? "oidc" : "none" });
 }
