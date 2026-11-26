@@ -51,7 +51,7 @@ export function GuestTable({ guests, op }: { guests: Row[]; op: (fd: FormData) =
                     ) : (
                       <button name="op" value="checkin" className="btn sm">Check in</button>
                     )}
-                    <button name="op" value="reset-pin" className="btn ghost sm" title="Lets them set a new PIN">PIN</button>
+                    <button name="op" value="reset-pin" className="btn ghost sm" title="Wipes their PIN so they can choose a new one" onClick={(e) => { if (!confirm(`Reset ${g.name}'s PIN? They'll choose a new one next time they log in.`)) e.preventDefault(); }}>Reset PIN</button>
                     <button name="op" value="delete" className="btn danger ghost sm" onClick={(e) => { if (!confirm(`Remove ${g.name}?`)) e.preventDefault(); }}>✕</button>
                   </form>
                 </td>

@@ -32,6 +32,7 @@ export default async function GuestsAdmin({ searchParams }: { searchParams: Prom
             <button className="btn sm">Add</button>
           </form>
         </div>
+        <p className="notice">How guests get in: they open the guest link, type the party code, tap their name and <b>choose their own 4-digit PIN</b>. Nothing is emailed or texted. “Reset PIN” wipes it so they can pick a new one.</p>
         <a className="btn ghost sm" href="/admin/guests/export" download>Export CSV (RSVP + check-in)</a>
       </section>
       <section className="section" style={{ borderBottom: 0 }}>
