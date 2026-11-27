@@ -22,11 +22,11 @@ export default async function PrizePage() {
         <span className="eyebrow">{cfg.prize.closed ? "Hunt over" : live ? "The hunt is on" : "Classified"}</span>
         <h1 className="display">{cfg.prize.closed ? "Someone found it." : "Something's hidden in the venue"}</h1>
         {cfg.prize.closed ? (
-          <p style={{ margin: 0, color: "#dad7d0" }}>
+          <p style={{ margin: 0, color: "#c9d3bf" }}>
             {cfg.prize.foundBy || "A legend"} found it{cfg.prize.foundAt ? ` at ${time(cfg.prize.foundAt)}` : ""}. Better luck next year.
           </p>
         ) : (
-          <p style={{ margin: 0, color: "#dad7d0" }}>
+          <p style={{ margin: 0, color: "#c9d3bf" }}>
             Clues drop one at a time. First to find it and show Anth or Dylan keeps it. No digging through bins.
           </p>
         )}

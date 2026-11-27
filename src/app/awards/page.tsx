@@ -31,7 +31,7 @@ export default async function AwardsPage() {
         <section className="section dark">
           <span className="eyebrow">Best of the Night</span>
           <h1 className="display">The winners</h1>
-          <p style={{ margin: 0, color: "#dad7d0" }}>Vouchers are on their way. No recounts.</p>
+          <p style={{ margin: 0, color: "#c9d3bf" }}>Vouchers are on their way. No recounts.</p>
         </section>
         <section className="section" style={{ borderBottom: 0 }}>
           <div className="list">

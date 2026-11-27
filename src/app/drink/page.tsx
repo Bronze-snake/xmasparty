@@ -17,7 +17,7 @@ export default async function DrinkPage() {
       <section className="section dark">
         <span className="eyebrow">Welcome drink</span>
         <h1 className="display">{c.name || "The signature"}</h1>
-        {c.blurb && <p style={{ margin: 0, color: "#dad7d0" }}>{c.blurb}</p>}
+        {c.blurb && <p style={{ margin: 0, color: "#c9d3bf" }}>{c.blurb}</p>}
       </section>
       {c.imageUrl && (
         // eslint-disable-next-line @next/next/no-img-element

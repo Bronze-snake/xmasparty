@@ -27,11 +27,11 @@ export const DEFAULT_AWARDS: Award[] = [
 
 export const DEFAULT_CONFIG: EventConfig = {
   name: "Bronze Snake Xmas Party",
-  tagline: "Dust off something good. Bring your camera face. Leave your manager problems at the door.",
+  tagline: "Grab a drink, celebrate with us. Dust off something good and bring your camera face.",
   dateLabel: "Sat 5 Dec",
   timeLabel: "7–11pm",
   startsAt: "2026-12-05T19:00:00+11:00",
-  venue: "",
+  venue: "Kiki's Tavern",
   address: "",
   mapUrl: "",
   dressCode: "",

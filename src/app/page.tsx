@@ -22,19 +22,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     return (
       <main className="shell">
         <Topbar cfg={cfg} />
-        <section className="section dark" style={{ gap: 18 }}>
-          <span className="eyebrow live" style={{ color: "var(--silver)" }}>
-            You&apos;re on the list, {guest.first}
-          </span>
-          <h1 className="display">{cfg.name}</h1>
-          <p style={{ margin: 0, fontSize: 16, lineHeight: 1.45, color: "#dad7d0" }}>{cfg.tagline}</p>
-          <div className="grid3" style={{ borderTop: "1px solid #3a3a3a", borderBottom: "1px solid #3a3a3a", gap: 0 }}>
+        <section className="section dark hero">
+          <span className="eyebrow">Welcome to the</span>
+          <h1 className="display">Bronze Snake</h1>
+          <span className="eyebrow" style={{ color: "#fff" }}>2026 End of Year<br />Christmas Celebration</span>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.5, color: "#c9d3bf" }}>{cfg.tagline}</p>
+          <div className="grid3" style={{ borderTop: "1px solid #33432a", borderBottom: "1px solid #33432a", gap: 0, width: "100%" }}>
             <Cell label="Date" value={cfg.dateLabel} />
             <Cell label="Time" value={cfg.timeLabel} left />
             <Cell label="Countdown" value={<Countdown iso={cfg.startsAt} />} left />
           </div>
           {f.rsvp && (
-            <form action={rsvpAction} className="field">
+            <form action={rsvpAction} className="field" style={{ width: "100%" }}>
               <span className="small" style={{ fontWeight: 600 }}>
                 {guest.rsvp === "yes" ? "You're in. Change of plans?" : guest.rsvp === "no" ? "You said no. Reconsidering?" : `Coming, ${guest.first}?`}
               </span>
@@ -42,7 +41,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
                 <button className={`btn ${guest.rsvp === "yes" ? "silver" : "paper"}`} name="rsvp" value="yes">
                   {guest.rsvp === "yes" ? "✓ I'm in" : "I'm in"}
                 </button>
-                <button className="btn ghost" name="rsvp" value="no" style={{ color: "var(--paper)", borderColor: "#6a6c6f" }}>
+                <button className="btn ghost" name="rsvp" value="no" style={{ color: "var(--paper)", borderColor: "#6f7d66" }}>
                   {guest.rsvp === "no" ? "✓ Can't make it" : "Can't make it"}
                 </button>
               </div>
@@ -82,10 +81,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           </ol>
         </section>
 
-        <section className="section dark" style={{ margin: 20, borderRadius: 6, border: "1px solid var(--silver)" }}>
+        <section className="section dark" style={{ margin: 20, textAlign: "center", alignItems: "center" }}>
           <span className="eyebrow">Classified</span>
           <h2 className="display">Something&apos;s hidden in the venue</h2>
-          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.45, color: "#dad7d0" }}>
+          <p style={{ margin: 0, fontSize: 14, lineHeight: 1.45, color: "#c9d3bf" }}>
             Clues drop one at a time on the night. Find it, show Anth or Dylan, it&apos;s yours.
           </p>
         </section>
@@ -131,7 +130,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         )}
         {!guest.checkedInAt ? (
           <section className="section" style={{ flex: 1, gap: 20, borderBottom: 0 }}>
-            <h1 className="display">You made it.</h1>
+            <h1 className="display">You made it</h1>
             <p className="muted" style={{ margin: 0, fontSize: 16 }}>
               Check in so you can vote, grab the photos and get in on the hunt.
             </p>
@@ -154,8 +153,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           <>
             <section className="section" style={{ borderBottom: 0, paddingBottom: 6 }}>
               <span className="eyebrow">Checked in · {time(guest.checkedInAt)}</span>
-              <h1 className="display" style={{ fontSize: 46 }}>
-                Go on then, {guest.first}.
+              <h1 className="display" style={{ fontSize: 26 }}>
+                Go on then, {guest.first}
               </h1>
             </section>
             <section className="section" style={{ borderBottom: 0, gap: 10, paddingTop: 10 }}>
@@ -205,9 +204,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
   return (
     <main className="shell">
       <Topbar cfg={cfg} />
-      <section className="section dark" style={{ gap: 12 }}>
-        <h1 className="display">That&apos;s a wrap.</h1>
-        <p style={{ margin: 0, fontSize: 15, color: "#dad7d0" }}>Drink water. Check the photos before your mum does.</p>
+      <section className="section dark hero">
+        <h1 className="display">That&apos;s a wrap</h1>
+        <p style={{ margin: 0, fontSize: 15, color: "#c9d3bf" }}>Drink water. Check the photos before your mum does.</p>
         <Link href="/photos" className="btn paper" style={{ marginTop: 6 }}>
           See the photos
         </Link>
@@ -236,7 +235,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         <div className="list">
           {awards.map((a) => (
             <div key={a.id}>
-              <span className="small" style={{ color: "#3e4043" }}>{a.title}</span>
+              <span className="small" style={{ color: "var(--muted)" }}>{a.title}</span>
               <span style={{ fontWeight: 700, textAlign: "right" }}>{winners ? winners[a.id] || "—" : "Announcing soon"}</span>
             </div>
           ))}
@@ -275,8 +274,8 @@ async function winnersFor(awards: { id: string }[]) {
 
 function Cell({ label, value, left }: { label: string; value: React.ReactNode; left?: boolean }) {
   return (
-    <div style={{ padding: left ? "12px 0 12px 12px" : "12px 0", borderLeft: left ? "1px solid #3a3a3a" : 0, display: "flex", flexDirection: "column", gap: 2 }}>
-      <span className="eyebrow" style={{ color: "#a9abae" }}>{label}</span>
+    <div style={{ padding: left ? "12px 0 12px 12px" : "12px 0", borderLeft: left ? "1px solid #33432a" : 0, display: "flex", flexDirection: "column", gap: 2 }}>
+      <span className="eyebrow" style={{ color: "#b9c6ae" }}>{label}</span>
       <span style={{ fontSize: 15, fontWeight: 700 }}>{value}</span>
     </div>
   );

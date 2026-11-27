@@ -67,9 +67,10 @@ export function JoinFlow({ eventName }: { eventName: string }) {
     <section className="section" style={{ borderBottom: 0, flex: 1, gap: 20 }}>
       {step === 1 && (
         <>
-          <div>
-            <p className="eyebrow">Invite only</p>
-            <h1 className="display">{eventName}</h1>
+          <div style={{ textAlign: "center", display: "flex", flexDirection: "column", gap: 14, padding: "24px 0 8px" }}>
+            <p className="eyebrow" style={{ margin: 0 }}>Welcome to the</p>
+            <h1 className="display" style={{ letterSpacing: "0.22em", marginLeft: "0.22em" }}>Bronze Snake</h1>
+            <p className="eyebrow" style={{ margin: 0 }}>2026 End of Year<br />Christmas Celebration</p>
           </div>
           <p className="muted" style={{ margin: 0 }}>
             Pop in the party code from your invite.
@@ -104,7 +105,7 @@ export function JoinFlow({ eventName }: { eventName: string }) {
         <>
           <div>
             <p className="eyebrow">{requirePin ? "Step 2 of 3" : "Last step"}</p>
-            <h1 className="display" style={{ fontSize: 44 }}>
+            <h1 className="display" style={{ fontSize: 24 }}>
               Which one are you?
             </h1>
           </div>
@@ -145,7 +146,7 @@ export function JoinFlow({ eventName }: { eventName: string }) {
         <>
           <div>
             <p className="eyebrow">Step 3 of 3 · {picked.first} {picked.last}</p>
-            <h1 className="display" style={{ fontSize: 44 }}>
+            <h1 className="display" style={{ fontSize: 24 }}>
               {picked.hasPin ? "Your PIN" : "Set a 4-digit PIN"}
             </h1>
           </div>

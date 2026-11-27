@@ -6,8 +6,8 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "BS Xmas",
     start_url: "/",
     display: "standalone",
-    background_color: "#0e0e0e",
-    theme_color: "#0e0e0e",
+    background_color: "#121f0b",
+    theme_color: "#121f0b",
     icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
   };
 }

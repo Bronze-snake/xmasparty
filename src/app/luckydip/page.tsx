@@ -19,7 +19,7 @@ export default async function LuckyDipPage() {
       <section className="section dark">
         <span className="eyebrow">One go each</span>
         <h1 className="display">Lucky dip</h1>
-        <p style={{ margin: 0, color: "#dad7d0" }}>{cfg.luckydip.blurb || "Tap the button. Get what you get. No swaps."}</p>
+        <p style={{ margin: 0, color: "#c9d3bf" }}>{cfg.luckydip.blurb || "Tap the button. Get what you get. No swaps."}</p>
       </section>
       <section className="section" style={{ borderBottom: 0, flex: 1 }}>
         {mine ? (
